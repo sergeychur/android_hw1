@@ -3,19 +3,21 @@ package com.example.hw_1;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 public class NumberItemAdapter extends RecyclerView.Adapter<NumberItemAdapter.NumberViewHolder> {
 
     private List<NumberItem> numbersList;
 
-    public NumberItemAdapter(List<NumberItem> items) {
-        setItems(items);
+    NumberItemAdapter(List<NumberItem> items) {
+        numbersList = items;
     }
 
     @NonNull
@@ -28,17 +30,14 @@ public class NumberItemAdapter extends RecyclerView.Adapter<NumberItemAdapter.Nu
 
     @Override
     public void onBindViewHolder(@NonNull NumberViewHolder holder, int position) {
-        holder.number = numbersList.get(position);
+        NumberItem number = numbersList.get(position);
+        holder.view.setText(String.format(Locale.getDefault(),"%d", number.num));
+        holder.view.setTextColor(number.color);
     }
 
     @Override
     public int getItemCount() {
         return numbersList.size();
-    }
-
-    private void setItems(Collection<NumberItem> items) {
-        numbersList.addAll(items);
-        notifyDataSetChanged();
     }
 
     public void clearItems() {
@@ -52,11 +51,10 @@ public class NumberItemAdapter extends RecyclerView.Adapter<NumberItemAdapter.Nu
     }
 
     class NumberViewHolder extends RecyclerView.ViewHolder {
-        public NumberItem number;
-        public final View view;
+        final TextView view;
         NumberViewHolder(View itemView) {
             super(itemView);
-            view = itemView;
+            view = itemView.findViewById(R.id.number);
 
         }
 

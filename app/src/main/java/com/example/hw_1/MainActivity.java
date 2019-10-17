@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,5 +18,12 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragment_container, new NumberListFragment())
                 .commit();
 
+    }
+
+    public void onButtonClick(View view) {
+        NumberListFragment fragment = (NumberListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (fragment != null) {
+            fragment.addItem();
+        }
     }
 }
