@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.Locale;
-
 public class NumberFragment extends Fragment {
     private final static String NUMBER = "num";
     private final static String COLOR = "color";
@@ -43,7 +41,7 @@ public class NumberFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_number, parent, false);
         TextView textView = view.findViewById(R.id.number_frag);
-        textView.setText(String.format(Locale.getDefault(), "%d", number));
+        textView.setText(String.valueOf(number));
         textView.setTextColor(color);
         return view;
     }

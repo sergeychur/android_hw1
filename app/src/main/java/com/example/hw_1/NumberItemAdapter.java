@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Locale;
 
 public class NumberItemAdapter extends RecyclerView.Adapter<NumberItemAdapter.NumberViewHolder> {
 
@@ -32,7 +31,7 @@ public class NumberItemAdapter extends RecyclerView.Adapter<NumberItemAdapter.Nu
     @Override
     public void onBindViewHolder(@NonNull NumberViewHolder holder, final int position) {
         final NumberItem number = numbersList.get(position);
-        holder.view.setText(String.format(Locale.getDefault(), "%d", number.num));
+        holder.view.setText(String.valueOf(number.num));
         holder.view.setTextColor(number.color);
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override

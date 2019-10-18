@@ -17,10 +17,12 @@ public class MainActivity extends AppCompatActivity implements NumberItemAdapter
             isNumberActivity = savedInstanceState.getBoolean(SAVED_STATE, false);
         }
         if (!isNumberActivity) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, NumberListFragment.newInstance())
-                    .commit();
+            if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, NumberListFragment.newInstance())
+                        .commit();
+            }
         }
     }
 

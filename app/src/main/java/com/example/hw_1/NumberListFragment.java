@@ -19,6 +19,7 @@ public class NumberListFragment extends Fragment implements View.OnClickListener
     private NumberItemAdapter adapter;
     private List<NumberItem> numbers = new ArrayList<>();
     private static String ELEMS_NUM_KEY = "ELEMS_NUM";
+    private int numbersSize;
 
     public NumberListFragment() {
         super();
@@ -38,6 +39,7 @@ public class NumberListFragment extends Fragment implements View.OnClickListener
         }
         for (int i = 0; i < elemsNum; ++i) {
             numbers.add(createItemToAdd());
+            ++numbersSize;
         }
     }
 
@@ -56,13 +58,13 @@ public class NumberListFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onDetach() {
-        adapter.clearRefs();
         super.onDetach();
+        adapter.clearRefs();
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle state) {
-        state.putInt(ELEMS_NUM_KEY, numbers.size());
+        state.putInt(ELEMS_NUM_KEY, numbersSize);
         super.onSaveInstanceState(state);
     }
 
@@ -74,6 +76,7 @@ public class NumberListFragment extends Fragment implements View.OnClickListener
     private void addItem() {
         NumberItem item = createItemToAdd();
         numbers.add(item);
+        ++numbersSize;
         adapter.notifyItemInserted(item.num - 1);
     }
 
