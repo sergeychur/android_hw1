@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NumberItemAdapter.NumberClicker {
     private final static String SAVED_STATE = "isNumberActivity";
@@ -45,13 +44,5 @@ public class MainActivity extends AppCompatActivity implements NumberItemAdapter
                 .addToBackStack(null)
                 .commit();
         isNumberActivity = true;
-    }
-
-
-    public void onButtonClick(View view) {
-        NumberListFragment fragment = (NumberListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (fragment != null) {
-            fragment.addItem();
-        }
     }
 }

@@ -25,7 +25,7 @@ public class NumberItemAdapter extends RecyclerView.Adapter<NumberItemAdapter.Nu
     @Override
     public NumberViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_number, parent, false);
+                .inflate(R.layout.number_in_list, parent, false);
         return new NumberViewHolder(view);
     }
 
@@ -55,10 +55,14 @@ public class NumberItemAdapter extends RecyclerView.Adapter<NumberItemAdapter.Nu
 
         NumberViewHolder(View itemView) {
             super(itemView);
-            view = itemView.findViewById(R.id.number_frag);
+            view = itemView.findViewById(R.id.number_small);
 
         }
 
+    }
+
+    void clearRefs() {
+        listener = null;
     }
 
     public interface NumberClicker {

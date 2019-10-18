@@ -6,14 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import java.util.Locale;
 
 public class NumberFragment extends Fragment {
-    private static String NUMBER = "num";
-    private static String COLOR = "color";
+    private final static String NUMBER = "num";
+    private final static String COLOR = "color";
     private int number;
     private int color;
 
@@ -47,13 +46,6 @@ public class NumberFragment extends Fragment {
         textView.setText(String.format(Locale.getDefault(), "%d", number));
         textView.setTextColor(color);
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle state) {
-        super.onSaveInstanceState(state);
-        state.putInt(NUMBER, number);
-        state.putInt(COLOR, color);
     }
 
 

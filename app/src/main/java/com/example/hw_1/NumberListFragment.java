@@ -1,6 +1,5 @@
 package com.example.hw_1;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumberListFragment extends Fragment {
+public class NumberListFragment extends Fragment implements View.OnClickListener {
     private NumberItemAdapter adapter;
     private List<NumberItem> numbers = new ArrayList<>();
     private static String ELEMS_NUM_KEY = "ELEMS_NUM";
@@ -26,10 +25,7 @@ public class NumberListFragment extends Fragment {
     }
 
     static NumberListFragment newInstance() {
-        NumberListFragment fragment = new NumberListFragment();
-        Bundle bundle = new Bundle();
-        fragment.setArguments(bundle);
-        return fragment;
+        return new NumberListFragment();
     }
 
 
@@ -52,28 +48,30 @@ public class NumberListFragment extends Fragment {
         NumberItemAdapter.NumberClicker listener = (NumberItemAdapter.NumberClicker) getActivity();
         adapter = new NumberItemAdapter(numbers, listener);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.columns_num)));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),
+                getResources().getInteger(R.integer.columns_num)));
+        view.findViewById(R.id.button).setOnClickListener(this);
         return view;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public void onDetach() {
+        adapter.clearRefs();
         super.onDetach();
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle state) {
-        super.onSaveInstanceState(state);
         state.putInt(ELEMS_NUM_KEY, numbers.size());
+        super.onSaveInstanceState(state);
     }
 
+    @Override
+    public void onClick(View view) {
+        addItem();
+    }
 
-    void addItem() {
+    private void addItem() {
         NumberItem item = createItemToAdd();
         numbers.add(item);
         adapter.notifyItemInserted(item.num - 1);
@@ -81,7 +79,8 @@ public class NumberListFragment extends Fragment {
 
     private NumberItem createItemToAdd() {
         int index = numbers.size() + 1;
-        return new NumberItem(index, getResources().getColor(index % 2 == 0 ? R.color.evenNumber : R.color.oddNumber));
+        return new NumberItem(index,
+                getResources().getColor(index % 2 == 0 ? R.color.evenNumber : R.color.oddNumber));
     }
 
 }
